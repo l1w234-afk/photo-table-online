@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026年5月任务表</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8f4;
+      --paper: #ffffff;
+      --ink: #1f2933;
+      --muted: #65717e;
+      --line: #d6dbe0;
+      --line-strong: #aeb8c2;
+      --accent: #0f766e;
+      --accent-dark: #0b5d57;
+      --accent-soft: #e5f4f2;
+      --warn: #b45309;
+      --warn-soft: #fff3d6;
+      --danger: #b42318;
+      --shadow: 0 18px 50px rgba(31, 41, 51, 0.12);
+      --radius: 8px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(15, 118, 110, 0.08), rgba(15, 118, 110, 0) 260px),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      letter-spacing: 0;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--line-strong);
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 7px;
+      min-height: 38px;
+      padding: 0 14px;
+      cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .primary:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .ghost {
+      background: transparent;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .login-view {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .login-panel {
+      width: min(440px, 100%);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .login-panel h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 760;
+    }
+
+    .login-panel p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .password-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .password-input,
+    .search-input {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      background: #fff;
+      border-radius: 7px;
+      min-height: 38px;
+      padding: 0 12px;
+      outline: none;
+    }
+
+    .password-input:focus,
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .login-error {
+      margin-top: 12px;
+      color: var(--danger);
+      min-height: 22px;
+      line-height: 1.5;
+    }
+
+    .app-view {
+      min-height: 100vh;
+    }
+
+    .app-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner,
+    .main-inner {
+      width: min(1480px, calc(100vw - 32px));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      padding: 22px 0 18px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.18;
+      font-weight: 780;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fbfcfd;
+      min-width: 112px;
+      padding: 8px 10px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .note {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 0 7px 7px 0;
+      padding: 10px 12px;
+      color: #23413f;
+      line-height: 1.55;
+      min-height: 64px;
+    }
+
+    .main-inner {
+      padding: 18px 0 28px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      width: min(320px, calc(100vw - 32px));
+    }
+
+    .segmented {
+      display: inline-flex;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .segmented button {
+      border: 0;
+      border-radius: 0;
+      min-height: 36px;
+      padding: 0 12px;
+      transform: none;
+    }
+
+    .segmented button + button {
+      border-left: 1px solid var(--line);
+    }
+
+    .segmented button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .status-text {
+      color: var(--muted);
+      font-size: 13px;
+      min-height: 18px;
+    }
+
+    .table-shell {
+      width: 100%;
+      overflow: auto;
+      border: 1px solid var(--line-strong);
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 12px 28px rgba(31, 41, 51, 0.08);
+      max-height: calc(100vh - 280px);
+    }
+
+    table {
+      width: max-content;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      font-size: 14px;
+    }
+
+    col.date-col {
+      width: 112px;
+    }
+
+    th,
+    td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 0;
+      height: 42px;
+      vertical-align: middle;
+      background: #fff;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      background: #f0f3f5;
+      color: #17212b;
+      font-weight: 740;
+      line-height: 1.25;
+      text-align: center;
+      padding: 7px 8px;
+    }
+
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      border-right: 1px solid var(--line-strong);
+    }
+
+    th:first-child {
+      z-index: 4;
+    }
+
+    td:first-child {
+      background: #f6f8f9;
+      font-family: var(--mono);
+      font-size: 13px;
+      text-align: center;
+      color: #26313d;
+      font-weight: 650;
+    }
+
+    tbody tr:nth-child(even) td:not(:first-child) {
+      background: #fbfbf8;
+    }
+
+    tbody tr.review-row td:first-child {
+      box-shadow: inset 3px 0 0 var(--warn);
+    }
+
+    .cell {
+      width: 100%;
+      min-height: 41px;
+      padding: 9px 8px;
+      outline: none;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 1.35;
+    }
+
+    .cell:focus {
+      box-shadow: inset 0 0 0 2px var(--accent);
+      background: #fff;
+    }
+
+    .cell.low-confidence {
+      background: var(--warn-soft);
+      color: #5f3604;
+    }
+
+    .summary-cell .cell {
+      text-align: left;
+    }
+
+    .numeric-cell .cell {
+      text-align: center;
+    }
+
+    .empty-state {
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      padding: 22px;
+      color: var(--muted);
+      background: #fff;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .header-inner,
+      .main-inner {
+        width: min(100vw - 20px, 1480px);
+      }
+
+      .notes {
+        grid-template-columns: 1fr;
+      }
+
+      .password-row {
+        grid-template-columns: 1fr;
+      }
+
+      h1,
+      .login-panel h1 {
+        font-size: 24px;
+      }
+
+      .table-shell {
+        max-height: calc(100vh - 360px);
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .login-view,
+      .toolbar,
+      .stats {
+        display: none !important;
+      }
+
+      .app-view,
+      .app-header,
+      .table-shell {
+        display: block !important;
+      }
+
+      .header-inner,
+      .main-inner {
+        width: 100%;
+      }
+
+      .table-shell {
+        max-height: none;
+        overflow: visible;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="loginView" class="login-view">
+    <section class="login-panel" aria-labelledby="loginTitle">
+      <h1 id="loginTitle">2026年5月任务表</h1>
+      <p>输入密码后打开在线表格。</p>
+      <form id="loginForm" class="password-row">
+        <input id="passwordInput" class="password-input" type="password" autocomplete="current-password" placeholder="密码" aria-label="密码">
+        <button class="primary" type="submit">打开</button>
+      </form>
+      <div id="loginError" class="login-error" role="status"></div>
+    </section>
+  </main>
+
+  <section id="appView" class="app-view hidden" aria-label="在线表格">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="title-row">
+          <div>
+            <h1 id="tableTitle">任务表</h1>
+            <p id="tableSubtitle" class="subtitle"></p>
+          </div>
+          <div class="stats" aria-label="统计">
+            <div class="stat"><strong id="statDays">0</strong><span>有记录天数</span></div>
+            <div class="stat"><strong id="statCells">0</strong><span>已填写单元格</span></div>
+            <div class="stat"><strong id="statReview">0</strong><span>待核对</span></div>
+          </div>
+        </div>
+        <div id="notes" class="notes"></div>
+      </div>
+    </header>
+
+    <div class="main-inner">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <input id="searchInput" class="search-input" type="search" placeholder="搜索日期、数字或总结" aria-label="搜索">
+          <div class="segmented" aria-label="筛选">
+            <button type="button" class="active" data-filter="all">全部</button>
+            <button type="button" data-filter="filled">已填写</button>
+            <button type="button" data-filter="review">待核对</button>
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <span id="saveState" class="status-text"></span>
+          <button id="exportButton" type="button">导出 CSV</button>
+          <button id="resetButton" class="ghost" type="button">重置</button>
+        </div>
+      </div>
+      <div id="tableShell" class="table-shell"></div>
+      <div id="emptyState" class="empty-state hidden">没有匹配的记录。</div>
+    </div>
+  </section>
+
+  <script>
+    const ENCRYPTED_PAYLOAD = {
+      v: 1,
+      alg: "AES-GCM",
+      kdf: "PBKDF2-SHA256",
+      iterations: 220000,
+      salt: "qaP7/tEuSDi5clxJRrhwAw==",
+      iv: "2eiwu554qD3IrItx",
+      ciphertext: "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"
+    };
+
+    const STORAGE_KEY = "photo-task-table-2026-05";
+    const els = {
+      loginView: document.getElementById("loginView"),
+      appView: document.getElementById("appView"),
+      loginForm: document.getElementById("loginForm"),
+      passwordInput: document.getElementById("passwordInput"),
+      loginError: document.getElementById("loginError"),
+      title: document.getElementById("tableTitle"),
+      subtitle: document.getElementById("tableSubtitle"),
+      notes: document.getElementById("notes"),
+      tableShell: document.getElementById("tableShell"),
+      emptyState: document.getElementById("emptyState"),
+      searchInput: document.getElementById("searchInput"),
+      saveState: document.getElementById("saveState"),
+      exportButton: document.getElementById("exportButton"),
+      resetButton: document.getElementById("resetButton"),
+      statDays: document.getElementById("statDays"),
+      statCells: document.getElementById("statCells"),
+      statReview: document.getElementById("statReview")
+    };
+
+    const app = {
+      data: null,
+      rows: [],
+      originalRows: [],
+      qualityMap: new Set(),
+      filter: "all",
+      saveTimer: null
+    };
+
+    function fromBase64(value) {
+      const binary = atob(value);
+      const bytes = new Uint8Array(binary.length);
+      for (let index = 0; index < binary.length; index += 1) {
+        bytes[index] = binary.charCodeAt(index);
+      }
+      return bytes;
+    }
+
+    async function decryptPayload(password) {
+      if (!crypto.subtle) {
+        throw new Error("当前浏览器不支持安全解密。");
+      }
+
+      const encoder = new TextEncoder();
+      const baseKey = await crypto.subtle.importKey(
+        "raw",
+        encoder.encode(password),
+        "PBKDF2",
+        false,
+        ["deriveKey"]
+      );
+
+      const key = await crypto.subtle.deriveKey(
+        {
+          name: "PBKDF2",
+          hash: "SHA-256",
+          salt: fromBase64(ENCRYPTED_PAYLOAD.salt),
+          iterations: ENCRYPTED_PAYLOAD.iterations
+        },
+        baseKey,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["decrypt"]
+      );
+
+      const plain = await crypto.subtle.decrypt(
+        { name: "AES-GCM", iv: fromBase64(ENCRYPTED_PAYLOAD.iv) },
+        key,
+        fromBase64(ENCRYPTED_PAYLOAD.ciphertext)
+      );
+
+      return JSON.parse(new TextDecoder().decode(plain));
+    }
+
+    function getCellValue(cell) {
+      return typeof cell === "object" && cell !== null ? cell.v || "" : cell || "";
+    }
+
+    function cloneRows(rows) {
+      return rows.map((row) => row.map(getCellValue));
+    }
+
+    function buildQualityMap(rows) {
+      const quality = new Set();
+      rows.forEach((row, rowIndex) => {
+        row.forEach((cell, columnIndex) => {
+          if (typeof cell === "object" && cell !== null && cell.q === "low") {
+            quality.add(`${rowIndex}:${columnIndex}`);
+          }
+        });
+      });
+      return quality;
+    }
+
+    function loadSavedRows() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (!Array.isArray(saved) || saved.length !== app.originalRows.length) {
+          return null;
+        }
+        return saved;
+      } catch {
+        return null;
+      }
+    }
+
+    function scheduleSave() {
+      clearTimeout(app.saveTimer);
+      els.saveState.textContent = "保存中";
+      app.saveTimer = setTimeout(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(app.rows));
+        els.saveState.textContent = "已保存于本机";
+      }, 250);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function isNumericColumn(key) {
+      return !["date", "summary"].includes(key);
+    }
+
+    function rowHasContent(row) {
+      return row.slice(1).some((cell) => String(cell).trim() !== "");
+    }
+
+    function rowNeedsReview(rowIndex) {
+      return app.data.columns.some((_, columnIndex) => {
+        return app.qualityMap.has(`${rowIndex}:${columnIndex}`) && String(app.rows[rowIndex][columnIndex]).trim() !== "";
+      });
+    }
+
+    function renderNotes() {
+      els.notes.innerHTML = app.data.monthNotes
+        .map((note) => `<div class="note">${escapeHtml(note)}</div>`)
+        .join("");
+    }
+
+    function renderTable() {
+      const query = els.searchInput.value.trim().toLowerCase();
+      const visibleRows = app.rows
+        .map((row, rowIndex) => ({ row, rowIndex }))
+        .filter(({ row, rowIndex }) => {
+          const searchable = row.join(" ").toLowerCase();
+          const matchesSearch = !query || searchable.includes(query);
+          const matchesFilter =
+            app.filter === "all" ||
+            (app.filter === "filled" && rowHasContent(row)) ||
+            (app.filter === "review" && rowNeedsReview(rowIndex));
+          return matchesSearch && matchesFilter;
+        });
+
+      els.emptyState.classList.toggle("hidden", visibleRows.length > 0);
+      els.tableShell.classList.toggle("hidden", visibleRows.length === 0);
+
+      const colgroup = app.data.columns
+        .map((column, index) => `<col class="${index === 0 ? "date-col" : ""}" style="width:${column.width || 96}px">`)
+        .join("");
+
+      const header = app.data.columns
+        .map((column) => `<th scope="col">${escapeHtml(column.label)}</th>`)
+        .join("");
+
+      const body = visibleRows
+        .map(({ row, rowIndex }) => {
+          const reviewClass = rowNeedsReview(rowIndex) ? " review-row" : "";
+          const cells = app.data.columns
+            .map((column, columnIndex) => {
+              const value = row[columnIndex] || "";
+              const low = app.qualityMap.has(`${rowIndex}:${columnIndex}`) && String(value).trim() !== "";
+              const summary = column.key === "summary" ? " summary-cell" : "";
+              const numeric = isNumericColumn(column.key) ? " numeric-cell" : "";
+              if (column.locked) {
+                return `<td class="${summary}${numeric}"><div class="cell">${escapeHtml(value)}</div></td>`;
+              }
+              return `<td class="${summary}${numeric}">
+                <div class="cell${low ? " low-confidence" : ""}" contenteditable="true" spellcheck="false" data-row="${rowIndex}" data-column="${columnIndex}">${escapeHtml(value)}</div>
+              </td>`;
+            })
+            .join("");
+          return `<tr class="${reviewClass}">${cells}</tr>`;
+        })
+        .join("");
+
+      els.tableShell.innerHTML = `<table><colgroup>${colgroup}</colgroup><thead><tr>${header}</tr></thead><tbody>${body}</tbody></table>`;
+      updateStats();
+    }
+
+    function updateStats() {
+      const filledDays = app.rows.filter(rowHasContent).length;
+      const filledCells = app.rows.reduce((total, row) => {
+        return total + row.slice(1).filter((cell) => String(cell).trim() !== "").length;
+      }, 0);
+      const reviewCells = app.rows.reduce((total, row, rowIndex) => {
+        return total + row.filter((cell, columnIndex) => {
+          return app.qualityMap.has(`${rowIndex}:${columnIndex}`) && String(cell).trim() !== "";
+        }).length;
+      }, 0);
+
+      els.statDays.textContent = filledDays;
+      els.statCells.textContent = filledCells;
+      els.statReview.textContent = reviewCells;
+    }
+
+    function unlock(data) {
+      app.data = data;
+      app.originalRows = cloneRows(data.rows);
+      app.rows = loadSavedRows() || cloneRows(data.rows);
+      app.qualityMap = buildQualityMap(data.rows);
+
+      els.title.textContent = data.title;
+      els.subtitle.textContent = data.subtitle;
+      renderNotes();
+      renderTable();
+
+      els.loginView.classList.add("hidden");
+      els.appView.classList.remove("hidden");
+      els.saveState.textContent = localStorage.getItem(STORAGE_KEY) ? "已读取本机保存" : "";
+    }
+
+    function exportCsv() {
+      const header = app.data.columns.map((column) => column.label);
+      const csvRows = [header, ...app.rows].map((row) => {
+        return row.map((cell) => `"${String(cell).replaceAll('"', '""')}"`).join(",");
+      });
+      const blob = new Blob(["\ufeff" + csvRows.join("\n")], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "2026-05-task-table.csv";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    els.loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const password = els.passwordInput.value;
+      els.loginError.textContent = "";
+      if (!password) {
+        els.loginError.textContent = "请输入密码。";
+        return;
+      }
+
+      try {
+        els.loginForm.querySelector("button").disabled = true;
+        const data = await decryptPayload(password);
+        unlock(data);
+      } catch {
+        els.loginError.textContent = "密码不正确。";
+      } finally {
+        els.loginForm.querySelector("button").disabled = false;
+      }
+    });
+
+    els.tableShell.addEventListener("input", (event) => {
+      const target = event.target;
+      if (!target.classList.contains("cell") || !target.dataset.row) {
+        return;
+      }
+
+      const rowIndex = Number(target.dataset.row);
+      const columnIndex = Number(target.dataset.column);
+      app.rows[rowIndex][columnIndex] = target.innerText.trim();
+      scheduleSave();
+      updateStats();
+    });
+
+    els.searchInput.addEventListener("input", renderTable);
+
+    document.querySelectorAll(".segmented button").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".segmented button").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        app.filter = button.dataset.filter;
+        renderTable();
+      });
+    });
+
+    els.exportButton.addEventListener("click", exportCsv);
+
+    els.resetButton.addEventListener("click", () => {
+      const confirmed = confirm("重置为照片录入版本？");
+      if (!confirmed) {
+        return;
+      }
+      app.rows = cloneRows(app.data.rows);
+      localStorage.removeItem(STORAGE_KEY);
+      els.saveState.textContent = "已重置";
+      renderTable();
+    });
+  </script>
+</body>
+</html>
