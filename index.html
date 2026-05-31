@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2026年5-6月任务表</title>
+  <title>2026&#x5e74;5-6&#x6708;&#x4efb;&#x52a1;&#x8868;</title>
   <style>
     :root {
       color-scheme: light;
@@ -124,7 +124,8 @@
     }
 
     .password-input,
-    .search-input {
+    .search-input,
+    .modal-input {
       width: 100%;
       border: 1px solid var(--line-strong);
       background: #fff;
@@ -135,7 +136,8 @@
     }
 
     .password-input:focus,
-    .search-input:focus {
+    .search-input:focus,
+    .modal-input:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
     }
@@ -181,6 +183,24 @@
       font-weight: 780;
     }
 
+    .title-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .version-badge {
+      border: 1px solid var(--accent);
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      padding: 5px 8px;
+    }
+
     .subtitle {
       margin: 8px 0 0;
       color: var(--muted);
@@ -217,7 +237,7 @@
 
     .notes {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
       margin-top: 16px;
     }
@@ -295,7 +315,9 @@
       background: #fff;
       border-radius: var(--radius);
       box-shadow: 0 12px 28px rgba(31, 41, 51, 0.08);
-      max-height: calc(100vh - 280px);
+      max-height: calc(100svh - 260px);
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
@@ -323,25 +345,26 @@
     th {
       position: sticky;
       top: 0;
-      z-index: 3;
+      z-index: 5;
       background: #f0f3f5;
       color: #17212b;
       font-weight: 740;
       line-height: 1.25;
       text-align: center;
       padding: 7px 8px;
+      box-shadow: 0 1px 0 var(--line-strong);
     }
 
     th:first-child,
     td:first-child {
       position: sticky;
       left: 0;
-      z-index: 2;
+      z-index: 4;
       border-right: 1px solid var(--line-strong);
     }
 
     th:first-child {
-      z-index: 4;
+      z-index: 8;
     }
 
     td:first-child {
@@ -398,14 +421,77 @@
       text-align: center;
     }
 
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.36);
+    }
+
+    .modal {
+      width: min(440px, 100%);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .modal h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .modal p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .modal-fields {
+      display: grid;
+      gap: 10px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
     @media (max-width: 900px) {
       .header-inner,
       .main-inner {
-        width: min(100vw - 20px, 1480px);
+        width: min(100vw - 16px, 1480px);
+      }
+
+      .header-inner {
+        padding-top: 14px;
+      }
+
+      .title-row {
+        align-items: flex-start;
       }
 
       .notes {
         grid-template-columns: 1fr;
+      }
+
+      .stats {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .stat {
+        min-width: 0;
+        padding: 8px;
       }
 
       .password-row {
@@ -418,7 +504,51 @@
       }
 
       .table-shell {
-        max-height: calc(100vh - 360px);
+        max-height: calc(100svh - 360px);
+        border-radius: 6px;
+      }
+
+      .toolbar,
+      .toolbar-left,
+      .toolbar-right {
+        align-items: stretch;
+        width: 100%;
+      }
+
+      .toolbar-left {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .segmented {
+        width: 100%;
+      }
+
+      .segmented button {
+        flex: 1 1 0;
+        padding: 0 8px;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .toolbar-right button {
+        flex: 1 1 auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .login-panel {
+        padding: 22px;
+      }
+
+      .stat span {
+        font-size: 11px;
+      }
+
+      .table-shell {
+        max-height: calc(100svh - 390px);
       }
     }
 
@@ -455,28 +585,31 @@
 <body>
   <main id="loginView" class="login-view">
     <section class="login-panel" aria-labelledby="loginTitle">
-      <h1 id="loginTitle">2026年5-6月任务表</h1>
-      <p>输入密码后打开在线表格。</p>
+      <h1 id="loginTitle">&#x32;&#x30;&#x32;&#x36;&#x5e74;&#x35;&#x2d;&#x36;&#x6708;&#x4efb;&#x52a1;&#x8868;</h1>
+      <p>&#x8f93;&#x5165;&#x5bc6;&#x7801;&#x540e;&#x6253;&#x5f00;&#x5728;&#x7ebf;&#x8868;&#x683c;&#x3002;</p>
       <form id="loginForm" class="password-row">
-        <input id="passwordInput" class="password-input" type="password" autocomplete="current-password" placeholder="密码" aria-label="密码">
-        <button class="primary" type="submit">打开</button>
+        <input id="passwordInput" class="password-input" type="password" autocomplete="current-password" placeholder="&#x5bc6;&#x7801;" aria-label="&#x5bc6;&#x7801;">
+        <button class="primary" type="submit">&#x6253;&#x5f00;</button>
       </form>
       <div id="loginError" class="login-error" role="status"></div>
     </section>
   </main>
 
-  <section id="appView" class="app-view hidden" aria-label="在线表格">
+  <section id="appView" class="app-view hidden" aria-label="&#x5728;&#x7ebf;&#x8868;&#x683c;">
     <header class="app-header">
       <div class="header-inner">
         <div class="title-row">
           <div>
-            <h1 id="tableTitle">任务表</h1>
+            <div class="title-line">
+              <h1 id="tableTitle">&#x4efb;&#x52a1;&#x8868;</h1>
+              <span id="versionBadge" class="version-badge">1.1&#x7248;</span>
+            </div>
             <p id="tableSubtitle" class="subtitle"></p>
           </div>
-          <div class="stats" aria-label="统计">
-            <div class="stat"><strong id="statDays">0</strong><span>有记录天数</span></div>
-            <div class="stat"><strong id="statCells">0</strong><span>已填写单元格</span></div>
-            <div class="stat"><strong id="statReview">0</strong><span>待核对</span></div>
+          <div class="stats" aria-label="&#x7edf;&#x8ba1;">
+            <div class="stat"><strong id="statDays">0</strong><span>&#x6709;&#x8bb0;&#x5f55;&#x5929;&#x6570;</span></div>
+            <div class="stat"><strong id="statCells">0</strong><span>&#x5df2;&#x586b;&#x5199;&#x5355;&#x5143;&#x683c;</span></div>
+            <div class="stat"><strong id="statReview">0</strong><span>&#x5f85;&#x6838;&#x5bf9;</span></div>
           </div>
         </div>
         <div id="notes" class="notes"></div>
@@ -486,22 +619,43 @@
     <div class="main-inner">
       <div class="toolbar">
         <div class="toolbar-left">
-          <input id="searchInput" class="search-input" type="search" placeholder="搜索日期、数字或总结" aria-label="搜索">
-          <div class="segmented" aria-label="筛选">
-            <button type="button" class="active" data-filter="all">全部</button>
-            <button type="button" data-filter="filled">已填写</button>
-            <button type="button" data-filter="review">待核对</button>
+          <div class="segmented month-switch" aria-label="&#x6708;&#x4efd;">
+            <button type="button" class="active" data-month="5">5&#x6708;</button>
+            <button type="button" data-month="6">6&#x6708;</button>
+          </div>
+          <input id="searchInput" class="search-input" type="search" placeholder="&#x641c;&#x7d22;&#x65e5;&#x671f;&#x3001;&#x6570;&#x5b57;&#x6216;&#x603b;&#x7ed3;" aria-label="&#x641c;&#x7d22;">
+          <div class="segmented" aria-label="&#x7b5b;&#x9009;">
+            <button type="button" class="active" data-filter="all">&#x5168;&#x90e8;</button>
+            <button type="button" data-filter="filled">&#x5df2;&#x586b;&#x5199;</button>
+            <button type="button" data-filter="review">&#x5f85;&#x6838;&#x5bf9;</button>
           </div>
         </div>
         <div class="toolbar-right">
           <span id="saveState" class="status-text"></span>
-          <button id="exportButton" type="button">导出 CSV</button>
+          <button id="exportButton" type="button">&#x5bfc;&#x51fa; CSV</button>
+          <button id="passwordButton" class="ghost" type="button">&#x4fee;&#x6539;&#x5bc6;&#x7801;</button>
         </div>
       </div>
       <div id="tableShell" class="table-shell"></div>
-      <div id="emptyState" class="empty-state hidden">没有匹配的记录。</div>
+      <div id="emptyState" class="empty-state hidden">&#x6ca1;&#x6709;&#x5339;&#x914d;&#x7684;&#x8bb0;&#x5f55;&#x3002;</div>
     </div>
   </section>
+
+  <div id="passwordModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="passwordModalTitle">
+    <section class="modal">
+      <h2 id="passwordModalTitle">&#x4fee;&#x6539;&#x5bc6;&#x7801;</h2>
+      <p>&#x65b0;&#x5bc6;&#x7801;&#x4ec5;&#x4fdd;&#x5b58;&#x5728;&#x5f53;&#x524d;&#x6d4f;&#x89c8;&#x5668;&#x3002;&#x6362;&#x8bbe;&#x5907;&#x8bbf;&#x95ee;&#x65f6;&#xff0c;&#x4ecd;&#x53ef;&#x4f7f;&#x7528;&#x521d;&#x59cb;&#x5bc6;&#x7801;&#x3002;</p>
+      <form id="passwordForm" class="modal-fields">
+        <input id="newPasswordInput" class="modal-input" type="password" autocomplete="new-password" placeholder="&#x65b0;&#x5bc6;&#x7801;" aria-label="&#x65b0;&#x5bc6;&#x7801;">
+        <input id="confirmPasswordInput" class="modal-input" type="password" autocomplete="new-password" placeholder="&#x786e;&#x8ba4;&#x5bc6;&#x7801;" aria-label="&#x786e;&#x8ba4;&#x5bc6;&#x7801;">
+        <div id="passwordError" class="modal-error" role="status"></div>
+        <div class="modal-actions">
+          <button id="passwordCancelButton" class="ghost" type="button">&#x53d6;&#x6d88;</button>
+          <button class="primary" type="submit">&#x4fdd;&#x5b58;&#x65b0;&#x5bc6;&#x7801;</button>
+        </div>
+      </form>
+    </section>
+  </div>
 
   <script>
     const ENCRYPTED_PAYLOAD = {
@@ -509,12 +663,30 @@
           "alg": "AES-GCM",
           "kdf": "PBKDF2-SHA256",
           "iterations": 220000,
-          "salt": "0hWjk3HHD8YuzgC4enxmrA==",
-          "iv": "UGpKBoiWCvK/gtRQ",
-          "ciphertext": "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"
+          "salt": "EuNRe2+47QiaA4THWVWbRw==",
+          "iv": "aXuXuf4si1ekZPma",
+          "ciphertext": "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"
     };
 
-    const STORAGE_KEY = "photo-task-table-2026-05";
+    const TEXT = {
+      cryptoUnsupported: "\u5f53\u524d\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u52a0\u5bc6\u89e3\u5bc6\uff0c\u8bf7\u4f7f\u7528 Chrome\u3001Edge \u6216 Safari \u6253\u5f00\u3002",
+      enterPassword: "\u8bf7\u8f93\u5165\u5bc6\u7801\u3002",
+      wrongPassword: "\u5bc6\u7801\u4e0d\u6b63\u786e\u3002",
+      saving: "\u4fdd\u5b58\u4e2d",
+      saved: "\u5df2\u4fdd\u5b58\u4e8e\u672c\u673a",
+      loadedLocal: "\u5df2\u8bfb\u53d6\u672c\u673a\u4fdd\u5b58",
+      passwordTooShort: "\u65b0\u5bc6\u7801\u81f3\u5c11\u9700\u8981 4 \u4f4d\u3002",
+      passwordMismatch: "\u4e24\u6b21\u8f93\u5165\u7684\u65b0\u5bc6\u7801\u4e0d\u4e00\u81f4\u3002",
+      passwordSaved: "\u5bc6\u7801\u5df2\u66f4\u65b0\u5230\u672c\u673a\u6d4f\u89c8\u5668",
+      passwordSaveFailed: "\u5bc6\u7801\u4fdd\u5b58\u5931\u8d25\uff0c\u8bf7\u91cd\u8bd5\u3002",
+      csvName: "2026-0{month}-task-table.csv"
+    };
+    
+    const ROWS_KEY = "photo-task-table-v11-rows";
+    const MONTH_KEY = "photo-task-table-v11-month";
+    const CUSTOM_PAYLOAD_KEY = "photo-task-table-v11-secure-payload";
+    const LEGACY_ROWS_KEY = "photo-task-table-2026-05";
+    
     const els = {
       loginView: document.getElementById("loginView"),
       appView: document.getElementById("appView"),
@@ -523,26 +695,40 @@
       loginError: document.getElementById("loginError"),
       title: document.getElementById("tableTitle"),
       subtitle: document.getElementById("tableSubtitle"),
+      versionBadge: document.getElementById("versionBadge"),
       notes: document.getElementById("notes"),
       tableShell: document.getElementById("tableShell"),
       emptyState: document.getElementById("emptyState"),
       searchInput: document.getElementById("searchInput"),
       saveState: document.getElementById("saveState"),
       exportButton: document.getElementById("exportButton"),
+      passwordButton: document.getElementById("passwordButton"),
+      passwordModal: document.getElementById("passwordModal"),
+      passwordForm: document.getElementById("passwordForm"),
+      newPasswordInput: document.getElementById("newPasswordInput"),
+      confirmPasswordInput: document.getElementById("confirmPasswordInput"),
+      passwordCancelButton: document.getElementById("passwordCancelButton"),
+      passwordError: document.getElementById("passwordError"),
       statDays: document.getElementById("statDays"),
       statCells: document.getElementById("statCells"),
-      statReview: document.getElementById("statReview")
+      statReview: document.getElementById("statReview"),
+      monthButtons: Array.from(document.querySelectorAll("[data-month]")),
+      filterButtons: Array.from(document.querySelectorAll("[data-filter]"))
     };
-
+    
     const app = {
       data: null,
       rows: [],
       originalRows: [],
       qualityMap: new Set(),
       filter: "all",
-      saveTimer: null
+      month: localStorage.getItem(MONTH_KEY) === "6" ? "6" : "5",
+      saveTimer: null,
+      secureSaveTimer: null,
+      sessionPassword: "",
+      customActive: false
     };
-
+    
     function fromBase64(value) {
       const binary = atob(value);
       const bytes = new Uint8Array(binary.length);
@@ -551,255 +737,512 @@
       }
       return bytes;
     }
-
-    async function decryptPayload(password) {
-      if (!crypto.subtle) {
-        throw new Error("当前浏览器不支持安全解密。");
-      }
-
-      const encoder = new TextEncoder();
-      const baseKey = await crypto.subtle.importKey(
+    
+    function toBase64(bytes) {
+      let binary = "";
+      bytes.forEach((byte) => {
+        binary += String.fromCharCode(byte);
+      });
+      return btoa(binary);
+    }
+    
+    async function deriveKey(password, salt, usages) {
+      const material = await crypto.subtle.importKey(
         "raw",
-        encoder.encode(password),
+        new TextEncoder().encode(password),
         "PBKDF2",
         false,
         ["deriveKey"]
       );
-
-      const key = await crypto.subtle.deriveKey(
+    
+      return crypto.subtle.deriveKey(
         {
           name: "PBKDF2",
-          hash: "SHA-256",
-          salt: fromBase64(ENCRYPTED_PAYLOAD.salt),
-          iterations: ENCRYPTED_PAYLOAD.iterations
+          salt,
+          iterations: ENCRYPTED_PAYLOAD.iterations,
+          hash: "SHA-256"
         },
-        baseKey,
-        { name: "AES-GCM", length: 256 },
+        material,
+        {
+          name: "AES-GCM",
+          length: 256
+        },
         false,
-        ["decrypt"]
+        usages
       );
-
+    }
+    
+    async function decryptPayloadWith(payload, password) {
+      const key = await deriveKey(password, fromBase64(payload.salt), ["decrypt"]);
       const plain = await crypto.subtle.decrypt(
-        { name: "AES-GCM", iv: fromBase64(ENCRYPTED_PAYLOAD.iv) },
+        {
+          name: "AES-GCM",
+          iv: fromBase64(payload.iv)
+        },
         key,
-        fromBase64(ENCRYPTED_PAYLOAD.ciphertext)
+        fromBase64(payload.ciphertext)
       );
-
       return JSON.parse(new TextDecoder().decode(plain));
     }
-
-    function getCellValue(cell) {
-      return typeof cell === "object" && cell !== null ? cell.v || "" : cell || "";
+    
+    async function encryptPayload(data, password) {
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const key = await deriveKey(password, salt, ["encrypt"]);
+      const cipher = await crypto.subtle.encrypt(
+        {
+          name: "AES-GCM",
+          iv
+        },
+        key,
+        new TextEncoder().encode(JSON.stringify(data))
+      );
+    
+      return {
+        v: 1,
+        alg: "AES-GCM",
+        kdf: "PBKDF2-SHA256",
+        iterations: ENCRYPTED_PAYLOAD.iterations,
+        salt: toBase64(salt),
+        iv: toBase64(new Uint8Array(iv)),
+        ciphertext: toBase64(new Uint8Array(cipher))
+      };
     }
-
-    function cloneRows(rows) {
-      return rows.map((row) => row.map(getCellValue));
+    
+    async function readSecurePayload(password) {
+      const customRaw = localStorage.getItem(CUSTOM_PAYLOAD_KEY);
+      if (customRaw) {
+        try {
+          const payload = JSON.parse(customRaw);
+          const data = await decryptPayloadWith(payload, password);
+          return {
+            data,
+            customActive: true
+          };
+        } catch (error) {
+          // Fall through to the built-in encrypted table so the original password remains a recovery path.
+        }
+      }
+    
+      return {
+        data: await decryptPayloadWith(ENCRYPTED_PAYLOAD, password),
+        customActive: false
+      };
     }
-
-    function buildQualityMap(rows) {
+    
+    function cellValue(cell) {
+      if (cell && typeof cell === "object") {
+        return cell.v || "";
+      }
+      return cell || "";
+    }
+    
+    function normalizeRow(row) {
+      return app.data.columns.map((column, index) => {
+        const value = row[index];
+        return value === undefined || value === null ? "" : value;
+      });
+    }
+    
+    function buildQualityMap(data) {
       const quality = new Set();
-      rows.forEach((row, rowIndex) => {
+      if (Array.isArray(data.qualityMap)) {
+        data.qualityMap.forEach((item) => quality.add(String(item)));
+      }
+    
+      data.rows.forEach((row, rowIndex) => {
         row.forEach((cell, columnIndex) => {
-          if (typeof cell === "object" && cell !== null && cell.q === "low") {
-            quality.add(`${rowIndex}:${columnIndex}`);
+          if (cell && typeof cell === "object" && cell.q === "low") {
+            quality.add(rowIndex + ":" + columnIndex);
           }
         });
       });
       return quality;
     }
-
-    function loadSavedRows() {
+    
+    function mergeSavedRows(rows) {
+      const savedRaw = localStorage.getItem(ROWS_KEY) || localStorage.getItem(LEGACY_ROWS_KEY);
+      if (!savedRaw) {
+        return {
+          rows,
+          loaded: false
+        };
+      }
+    
       try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-        if (!Array.isArray(saved) || saved.length !== app.originalRows.length) {
-          return null;
+        const savedRows = JSON.parse(savedRaw);
+        if (!Array.isArray(savedRows)) {
+          return {
+            rows,
+            loaded: false
+          };
         }
-        return saved;
-      } catch {
-        return null;
+    
+        const savedByDate = new Map();
+        savedRows.forEach((row) => {
+          if (Array.isArray(row) && row.length) {
+            savedByDate.set(String(cellValue(row[0])), normalizeRow(row));
+          }
+        });
+    
+        const merged = rows.map((row) => savedByDate.get(String(cellValue(row[0]))) || row);
+        localStorage.setItem(ROWS_KEY, JSON.stringify(merged));
+        return {
+          rows: merged,
+          loaded: true
+        };
+      } catch (error) {
+        return {
+          rows,
+          loaded: false
+        };
       }
     }
-
-    function scheduleSave() {
-      clearTimeout(app.saveTimer);
-      els.saveState.textContent = "保存中";
-      app.saveTimer = setTimeout(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(app.rows));
-        els.saveState.textContent = "已保存于本机";
-      }, 250);
-    }
-
+    
     function escapeHtml(value) {
       return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
-
-    function isNumericColumn(key) {
-      return !["date", "summary"].includes(key);
+    
+    function rowMonth(row) {
+      const value = String(cellValue(row[0]));
+      return value.split("/")[0];
     }
-
+    
     function rowHasContent(row) {
-      return row.slice(1).some((cell) => String(cell).trim() !== "");
+      return row.slice(1).some((cell) => String(cellValue(cell)).trim() !== "");
     }
-
+    
+    function rowMatchesSearch(row, query) {
+      if (!query) {
+        return true;
+      }
+      return row.some((cell) => String(cellValue(cell)).toLowerCase().includes(query));
+    }
+    
     function rowNeedsReview(rowIndex) {
-      return app.data.columns.some((_, columnIndex) => {
-        return app.qualityMap.has(`${rowIndex}:${columnIndex}`) && String(app.rows[rowIndex][columnIndex]).trim() !== "";
+      const prefix = rowIndex + ":";
+      for (const item of app.qualityMap) {
+        if (item.startsWith(prefix)) {
+          return true;
+        }
+      }
+      return false;
+    }
+    
+    function isNumericColumn(key) {
+      return !["date", "m_note", "noon_note", "pm_note", "summary"].includes(key);
+    }
+    
+    function visibleEntries() {
+      const query = els.searchInput.value.trim().toLowerCase();
+      return app.rows
+        .map((row, index) => ({
+          row,
+          index
+        }))
+        .filter((entry) => rowMonth(entry.row) === app.month)
+        .filter((entry) => rowMatchesSearch(entry.row, query))
+        .filter((entry) => {
+          if (app.filter === "filled") {
+            return rowHasContent(entry.row);
+          }
+          if (app.filter === "review") {
+            return rowNeedsReview(entry.index);
+          }
+          return true;
+        });
+    }
+    
+    function syncMonthButtons() {
+      els.monthButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.month === app.month);
       });
     }
-
-    function renderNotes() {
-      els.notes.innerHTML = app.data.monthNotes
-        .map((note) => `<div class="note">${escapeHtml(note)}</div>`)
+    
+    function syncFilterButtons() {
+      els.filterButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.filter === app.filter);
+      });
+    }
+    
+    function updateStats(entries) {
+      const scopedEntries = entries || visibleEntries();
+      const days = scopedEntries.filter((entry) => rowHasContent(entry.row)).length;
+      const cells = scopedEntries.reduce((count, entry) => {
+        return count + entry.row.slice(1).filter((cell) => String(cellValue(cell)).trim() !== "").length;
+      }, 0);
+      const review = scopedEntries.filter((entry) => rowNeedsReview(entry.index)).length;
+    
+      els.statDays.textContent = String(days);
+      els.statCells.textContent = String(cells);
+      els.statReview.textContent = String(review);
+    }
+    
+    function renderMeta() {
+      els.title.textContent = app.data.title;
+      els.subtitle.textContent = app.data.subtitle || "";
+      els.versionBadge.textContent = (app.data.version || "1.1") + "\u7248";
+      els.notes.innerHTML = (app.data.monthNotes || [])
+        .map((note) => "<div class=\"note\">" + escapeHtml(note) + "</div>")
         .join("");
     }
-
+    
     function renderTable() {
-      const query = els.searchInput.value.trim().toLowerCase();
-      const visibleRows = app.rows
-        .map((row, rowIndex) => ({ row, rowIndex }))
-        .filter(({ row, rowIndex }) => {
-          const searchable = row.join(" ").toLowerCase();
-          const matchesSearch = !query || searchable.includes(query);
-          const matchesFilter =
-            app.filter === "all" ||
-            (app.filter === "filled" && rowHasContent(row)) ||
-            (app.filter === "review" && rowNeedsReview(rowIndex));
-          return matchesSearch && matchesFilter;
-        });
-
-      els.emptyState.classList.toggle("hidden", visibleRows.length > 0);
-      els.tableShell.classList.toggle("hidden", visibleRows.length === 0);
-
-      const colgroup = app.data.columns
-        .map((column, index) => `<col class="${index === 0 ? "date-col" : ""}" style="width:${column.width || 96}px">`)
-        .join("");
-
-      const header = app.data.columns
-        .map((column) => `<th scope="col">${escapeHtml(column.label)}</th>`)
-        .join("");
-
-      const body = visibleRows
-        .map(({ row, rowIndex }) => {
-          const reviewClass = rowNeedsReview(rowIndex) ? " review-row" : "";
-          const cells = app.data.columns
-            .map((column, columnIndex) => {
-              const value = row[columnIndex] || "";
-              const low = app.qualityMap.has(`${rowIndex}:${columnIndex}`) && String(value).trim() !== "";
-              const summary = column.key === "summary" ? " summary-cell" : "";
-              const numeric = isNumericColumn(column.key) ? " numeric-cell" : "";
-              if (column.locked) {
-                return `<td class="${summary}${numeric}"><div class="cell">${escapeHtml(value)}</div></td>`;
-              }
-              return `<td class="${summary}${numeric}">
-                <div class="cell${low ? " low-confidence" : ""}" contenteditable="true" spellcheck="false" data-row="${rowIndex}" data-column="${columnIndex}">${escapeHtml(value)}</div>
-              </td>`;
-            })
-            .join("");
-          return `<tr class="${reviewClass}">${cells}</tr>`;
+      const entries = visibleEntries();
+      updateStats(entries);
+    
+      if (!entries.length) {
+        els.tableShell.innerHTML = "";
+        els.emptyState.classList.remove("hidden");
+        return;
+      }
+    
+      els.emptyState.classList.add("hidden");
+    
+      const colgroup = "<colgroup>" + app.data.columns
+        .map((column, index) => {
+          const width = Number(column.width || (index === 0 ? 112 : 96));
+          return "<col class=\"" + (index === 0 ? "date-col" : "") + "\" style=\"width:" + width + "px\">";
         })
-        .join("");
-
-      els.tableShell.innerHTML = `<table><colgroup>${colgroup}</colgroup><thead><tr>${header}</tr></thead><tbody>${body}</tbody></table>`;
-      updateStats();
+        .join("") + "</colgroup>";
+    
+      const header = "<thead><tr>" + app.data.columns
+        .map((column) => "<th scope=\"col\">" + escapeHtml(column.label) + "</th>")
+        .join("") + "</tr></thead>";
+    
+      const body = entries.map((entry) => {
+        const reviewClass = rowNeedsReview(entry.index) ? " review-row" : "";
+        const cells = app.data.columns.map((column, columnIndex) => {
+          const value = cellValue(entry.row[columnIndex]);
+          if (columnIndex === 0) {
+            return "<td>" + escapeHtml(value) + "</td>";
+          }
+    
+          const low = app.qualityMap.has(entry.index + ":" + columnIndex);
+          const summary = column.key === "summary" ? " summary-cell" : "";
+          const numeric = isNumericColumn(column.key) ? " numeric-cell" : "";
+          return "<td class=\"" + summary + numeric + "\"><div class=\"cell" + (low ? " low-confidence" : "") + "\" contenteditable=\"true\" spellcheck=\"false\" data-row=\"" + entry.index + "\" data-column=\"" + columnIndex + "\">" + escapeHtml(value) + "</div></td>";
+        }).join("");
+        return "<tr class=\"" + reviewClass + "\">" + cells + "</tr>";
+      }).join("");
+    
+      els.tableShell.innerHTML = "<table>" + colgroup + header + "<tbody>" + body + "</tbody></table>";
     }
-
-    function updateStats() {
-      const filledDays = app.rows.filter(rowHasContent).length;
-      const filledCells = app.rows.reduce((total, row) => {
-        return total + row.slice(1).filter((cell) => String(cell).trim() !== "").length;
-      }, 0);
-      const reviewCells = app.rows.reduce((total, row, rowIndex) => {
-        return total + row.filter((cell, columnIndex) => {
-          return app.qualityMap.has(`${rowIndex}:${columnIndex}`) && String(cell).trim() !== "";
-        }).length;
-      }, 0);
-
-      els.statDays.textContent = filledDays;
-      els.statCells.textContent = filledCells;
-      els.statReview.textContent = reviewCells;
+    
+    function dataForSecureSave() {
+      return {
+        title: app.data.title,
+        subtitle: app.data.subtitle,
+        version: app.data.version || "1.1",
+        monthNotes: app.data.monthNotes || [],
+        columns: app.data.columns,
+        rows: app.rows,
+        qualityMap: Array.from(app.qualityMap)
+      };
     }
-
-    function unlock(data) {
+    
+    function scheduleSecureSave() {
+      if (!app.customActive || !app.sessionPassword) {
+        return;
+      }
+    
+      window.clearTimeout(app.secureSaveTimer);
+      app.secureSaveTimer = window.setTimeout(async () => {
+        try {
+          const payload = await encryptPayload(dataForSecureSave(), app.sessionPassword);
+          localStorage.setItem(CUSTOM_PAYLOAD_KEY, JSON.stringify(payload));
+        } catch (error) {
+          els.saveState.textContent = TEXT.passwordSaveFailed;
+        }
+      }, 650);
+    }
+    
+    function scheduleSave() {
+      window.clearTimeout(app.saveTimer);
+      els.saveState.textContent = TEXT.saving;
+      app.saveTimer = window.setTimeout(() => {
+        try {
+          localStorage.setItem(ROWS_KEY, JSON.stringify(app.rows));
+          localStorage.removeItem(LEGACY_ROWS_KEY);
+          els.saveState.textContent = TEXT.saved;
+          scheduleSecureSave();
+        } catch (error) {
+          els.saveState.textContent = TEXT.passwordSaveFailed;
+        }
+      }, 250);
+    }
+    
+    function showApp(data, customActive) {
       app.data = data;
-      app.originalRows = cloneRows(data.rows);
-      app.rows = loadSavedRows() || cloneRows(data.rows);
-      app.qualityMap = buildQualityMap(data.rows);
-
-      els.title.textContent = data.title;
-      els.subtitle.textContent = data.subtitle;
-      renderNotes();
+      app.customActive = customActive;
+      app.qualityMap = buildQualityMap(data);
+      app.originalRows = data.rows.map((row) => normalizeRow(row));
+      const merged = mergeSavedRows(app.originalRows);
+      app.rows = merged.rows;
+    
+      renderMeta();
+      syncMonthButtons();
+      syncFilterButtons();
       renderTable();
-
+      els.saveState.textContent = merged.loaded ? TEXT.loadedLocal : "";
       els.loginView.classList.add("hidden");
       els.appView.classList.remove("hidden");
-      els.saveState.textContent = localStorage.getItem(STORAGE_KEY) ? "已读取本机保存" : "";
     }
-
+    
+    function csvEscape(value) {
+      const text = String(cellValue(value)).replace(/\r?\n/g, "\n");
+      if (/[",\n]/.test(text)) {
+        return "\"" + text.replace(/"/g, "\"\"") + "\"";
+      }
+      return text;
+    }
+    
     function exportCsv() {
-      const header = app.data.columns.map((column) => column.label);
-      const csvRows = [header, ...app.rows].map((row) => {
-        return row.map((cell) => `"${String(cell).replaceAll('"', '""')}"`).join(",");
+      const entries = visibleEntries();
+      const rows = [
+        app.data.columns.map((column) => column.label),
+        ...entries.map((entry) => entry.row.map((cell) => cellValue(cell)))
+      ];
+      const csv = "\ufeff" + rows.map((row) => row.map(csvEscape).join(",")).join("\n");
+      const blob = new Blob([csv], {
+        type: "text/csv;charset=utf-8"
       });
-      const blob = new Blob(["\ufeff" + csvRows.join("\n")], { type: "text/csv;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
-      link.href = url;
-      link.download = "2026-05-task-table.csv";
+      link.href = URL.createObjectURL(blob);
+      link.download = TEXT.csvName.replace("{month}", app.month);
       document.body.appendChild(link);
       link.click();
       link.remove();
-      URL.revokeObjectURL(url);
+      URL.revokeObjectURL(link.href);
     }
-
+    
+    function openPasswordModal() {
+      els.passwordError.textContent = "";
+      els.newPasswordInput.value = "";
+      els.confirmPasswordInput.value = "";
+      els.passwordModal.classList.remove("hidden");
+      window.setTimeout(() => els.newPasswordInput.focus(), 0);
+    }
+    
+    function closePasswordModal() {
+      els.passwordModal.classList.add("hidden");
+    }
+    
     els.loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
-      const password = els.passwordInput.value;
       els.loginError.textContent = "";
-      if (!password) {
-        els.loginError.textContent = "请输入密码。";
+    
+      if (!window.crypto || !window.crypto.subtle) {
+        els.loginError.textContent = TEXT.cryptoUnsupported;
         return;
       }
-
+    
+      const password = els.passwordInput.value;
+      if (!password) {
+        els.loginError.textContent = TEXT.enterPassword;
+        return;
+      }
+    
       try {
-        els.loginForm.querySelector("button").disabled = true;
-        const data = await decryptPayload(password);
-        unlock(data);
-      } catch {
-        els.loginError.textContent = "密码不正确。";
-      } finally {
-        els.loginForm.querySelector("button").disabled = false;
+        const result = await readSecurePayload(password);
+        app.sessionPassword = password;
+        showApp(result.data, result.customActive);
+      } catch (error) {
+        els.loginError.textContent = TEXT.wrongPassword;
       }
     });
-
+    
     els.tableShell.addEventListener("input", (event) => {
       const target = event.target;
-      if (!target.classList.contains("cell") || !target.dataset.row) {
+      const cell = target && target.closest ? target.closest(".cell") : null;
+      if (!cell) {
         return;
       }
-
-      const rowIndex = Number(target.dataset.row);
-      const columnIndex = Number(target.dataset.column);
-      app.rows[rowIndex][columnIndex] = target.innerText.trim();
+    
+      const rowIndex = Number(cell.dataset.row);
+      const columnIndex = Number(cell.dataset.column);
+      app.rows[rowIndex][columnIndex] = cell.innerText.replace(/\u00a0/g, " ").trim();
       scheduleSave();
       updateStats();
     });
-
+    
+    els.tableShell.addEventListener("paste", (event) => {
+      const target = event.target;
+      const cell = target && target.closest ? target.closest(".cell") : null;
+      if (!cell) {
+        return;
+      }
+    
+      event.preventDefault();
+      const text = event.clipboardData.getData("text/plain");
+      document.execCommand("insertText", false, text);
+    });
+    
     els.searchInput.addEventListener("input", renderTable);
-
-    document.querySelectorAll(".segmented button").forEach((button) => {
+    els.exportButton.addEventListener("click", exportCsv);
+    els.passwordButton.addEventListener("click", openPasswordModal);
+    els.passwordCancelButton.addEventListener("click", closePasswordModal);
+    
+    els.passwordModal.addEventListener("click", (event) => {
+      if (event.target === els.passwordModal) {
+        closePasswordModal();
+      }
+    });
+    
+    els.passwordForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const nextPassword = els.newPasswordInput.value;
+      const confirmPassword = els.confirmPasswordInput.value;
+    
+      if (nextPassword.length < 4) {
+        els.passwordError.textContent = TEXT.passwordTooShort;
+        return;
+      }
+    
+      if (nextPassword !== confirmPassword) {
+        els.passwordError.textContent = TEXT.passwordMismatch;
+        return;
+      }
+    
+      try {
+        const payload = await encryptPayload(dataForSecureSave(), nextPassword);
+        localStorage.setItem(CUSTOM_PAYLOAD_KEY, JSON.stringify(payload));
+        app.sessionPassword = nextPassword;
+        app.customActive = true;
+        closePasswordModal();
+        els.saveState.textContent = TEXT.passwordSaved;
+      } catch (error) {
+        els.passwordError.textContent = TEXT.passwordSaveFailed;
+      }
+    });
+    
+    els.monthButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        document.querySelectorAll(".segmented button").forEach((item) => item.classList.remove("active"));
-        button.classList.add("active");
-        app.filter = button.dataset.filter;
+        app.month = button.dataset.month;
+        localStorage.setItem(MONTH_KEY, app.month);
+        syncMonthButtons();
         renderTable();
       });
     });
-
-    els.exportButton.addEventListener("click", exportCsv);
+    
+    els.filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        app.filter = button.dataset.filter;
+        syncFilterButtons();
+        renderTable();
+      });
+    });
+    
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !els.passwordModal.classList.contains("hidden")) {
+        closePasswordModal();
+      }
+    });
   </script>
 </body>
 </html>
